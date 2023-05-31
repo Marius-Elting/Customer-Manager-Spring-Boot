@@ -1,0 +1,6 @@
+server:
+  port: 9898
+
+spring:
+  main:
+    web-application-type: servlet
