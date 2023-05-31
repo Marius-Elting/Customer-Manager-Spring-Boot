@@ -2,5 +2,12 @@ server:
   port: 9898
 
 spring:
+  datascource:
+    url: jdbc:postgresql://localhost:5332/customer
+    username: marius
+    password: password
+
+
+spring:
   main:
     web-application-type: servlet
