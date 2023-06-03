@@ -7,13 +7,22 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 // import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 // import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
 // @ComponentScan(basePackages = "com.marius")
 // @EnableAutoConfiguration
 @RestController
+@RequestMapping("api/v1/customers")
 public class Main {
+
+    private final CustomerRepository customerRepository;
+
+    public Main(CustomerRepository customerRepository) {
+        this.customerRepository = customerRepository;
+    }
+
     public static void main(String[] args) {
         SpringApplication.run(Main.class, args);
     }
@@ -31,6 +40,12 @@ public class Main {
         GreetResponse response = new GreetResponse("Hello", List.of("Java", "Typescript"),
                 new Person("Marius", 21, 2300.3));
         return response;
+    }
+
+    @GetMapping
+    public List<Customer> getCustomers() {
+        System.out.println(customerRepository.findAll());
+        return customerRepository.findAll();
     }
 
     // class GreetResponse {
