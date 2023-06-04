@@ -7,6 +7,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 // import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 // import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -46,6 +48,15 @@ public class Main {
     public List<Customer> getCustomers() {
         System.out.println(customerRepository.findAll());
         return customerRepository.findAll();
+    }
+
+    @PostMapping
+    public void addCustomer(@RequestBody NewCustomerRequest request) {
+        Customer customer = new Customer();
+        customer.setName(request.name());
+        customer.setEmail(request.email());
+        customer.setAge(request.age());
+        customerRepository.save(customer);
     }
 
     // class GreetResponse {
@@ -102,6 +113,13 @@ public class Main {
     }
 
     record GreetResponse(String greet, List<String> favProgrammingLanguages, Person person) {
+
+    }
+
+    static record NewCustomerRequest(
+            String name,
+            String email,
+            int age) {
 
     }
 
