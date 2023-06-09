@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 // import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 // import org.springframework.context.annotation.ComponentScan;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 // @ComponentScan(basePackages = "com.marius")
 // @EnableAutoConfiguration
 @RestController
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("api/v1/customers")
 public class Main {
 
