@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
-import org.apache.el.parser.Token;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +21,6 @@ public class JwtService {
     private static final String SECRET_KEY = "JKABSFKLBA9F8A89FHALDFBAF8Q39R883JKADFKH381290U345";
 
     public String extractUsername(String token) {
-        // TODO check this :: syntax
         return extractClaim(token, Claims::getSubject);
     }
 
