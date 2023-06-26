@@ -21,17 +21,20 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) {
-        http
-                .csrf(csrf -> csrf.disable())
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("").permitAll()
-                        .anyRequest().authenticated())
-                .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .and()
-                .authenticationProvider(authenticationProvider)
-                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+        try {
+            http
+                    .csrf(csrf -> csrf.disable())
+                    .authorizeHttpRequests(auth -> auth
+                            .requestMatchers("").permitAll()
+                            .anyRequest().authenticated())
+                    .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                    .authenticationProvider(authenticationProvider)
+                    .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+            return http.build();
+        } catch (Exception ex) {
+            throw new RuntimeException("the sky is falling!", ex);
 
-        return http.build();
+        }
 
     }
 }
